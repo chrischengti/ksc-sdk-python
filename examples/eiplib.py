@@ -83,7 +83,7 @@ def releaseAddress(AllocationId):
         print 'error '+str(e)
     else:
         print res
-def GetAccountAllProjectList():
+def getAccountAllProjectList():
     try:
         res = iamClient.get_account_all_project_list()
     except ClientError, e:
@@ -102,12 +102,12 @@ if __name__ == "__main__":
     for line in getLines():
         if line['LineName'] == 'BGP':
             lineId = line['LineId']
-    #allocateAddress(lineId,1,'Daily')u
+    #allocateAddress(lineId,1,'Daily')
     eips=['d2a6c424-8d32-424f-84d5-f41aef59fd11','ecfae0a6-8d8c-49c9-aa04-20bc2492fc3a']
-    projects=[1]
+    projects=[]
     #describeAddresses(ProjectIdN=projects)
     describeAddresses(AllocationIdN=eips,ProjectIdN=projects)
-    print GetAccountAllProjectList()
+    print getAccountAllProjectList()
     #associateAddress('2835602d-d12d-4799-bfb0-0331ef1e4edc','Ipfwd','8749bb48-0c63-444a-80ce-0bd9d0d91f34','8fced74a-e232-4916-8023-1febd55fb1a2')
     #disassociateAddress('2835602d-d12d-4799-bfb0-0331ef1e4edc')
     #releaseAddress('2835602d-d12d-4799-bfb0-0331ef1e4edc')

@@ -24,8 +24,17 @@ def getLines():
     else:
         print res 
         return res['LineSet']
-def allocateAddress(LineId,BandWidth,ChargeType,PurchaseTime=None,ProjectId=None):
+def describeAddresses():
+    try:
+        res = eipClient.describe_addresses()
+    except ClientError, e:
+        print 'error '+str(e)
+    else:
+	for eip in res['AddressesSet']:
+            print eip
+def allocateAddress(LineId,BandWidth,ChargeType,PurchaseTime=0,ProjectId=0):
     res = None
+
     param = {
             "LineId": LineId,
             "BandWidth": BandWidth,
@@ -79,7 +88,8 @@ if __name__ == "__main__":
     for line in getLines():
         if line['LineName'] == 'BGP':
             lineId = line['LineId']
-    #allocateAddress(lineId,1,'Daily',0)
+    #allocateAddress(lineId,1,'Daily')u
+    describeAddresses()
     #associateAddress('2835602d-d12d-4799-bfb0-0331ef1e4edc','Ipfwd','8749bb48-0c63-444a-80ce-0bd9d0d91f34','8fced74a-e232-4916-8023-1febd55fb1a2')
-    disassociateAddress('2835602d-d12d-4799-bfb0-0331ef1e4edc')
-    releaseAddress('2835602d-d12d-4799-bfb0-0331ef1e4edc')
+    #disassociateAddress('2835602d-d12d-4799-bfb0-0331ef1e4edc')
+    #releaseAddress('2835602d-d12d-4799-bfb0-0331ef1e4edc')

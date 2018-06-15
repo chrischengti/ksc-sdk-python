@@ -53,6 +53,20 @@ def associateAddress(AllocationId,InstanceType,InstanceId,NetworkInterfaceId):
         print 'error '+str(e)
     else:
         print res 
+def disassociateAddress(AllocationId):
+    try:
+        res = eipClient.disassociate_address(AllocationId=AllocationId)
+    except ClientError, e:
+        print 'error '+str(e)
+    else:
+        print res   
+def releaseAddress(AllocationId):
+    try:
+        res = eipClient.release_address(AllocationId=AllocationId)
+    except ClientError, e:
+        print 'error '+str(e)
+    else:
+        print res
 
 if __name__ == "__main__":
     s = get_session()
@@ -66,4 +80,6 @@ if __name__ == "__main__":
         if line['LineName'] == 'BGP':
             lineId = line['LineId']
     #allocateAddress(lineId,1,'Daily',0)
-    associateAddress('2835602d-d12d-4799-bfb0-0331ef1e4edc','Ipfwd','8749bb48-0c63-444a-80ce-0bd9d0d91f34','8fced74a-e232-4916-8023-1febd55fb1a2')
+    #associateAddress('2835602d-d12d-4799-bfb0-0331ef1e4edc','Ipfwd','8749bb48-0c63-444a-80ce-0bd9d0d91f34','8fced74a-e232-4916-8023-1febd55fb1a2')
+    disassociateAddress('2835602d-d12d-4799-bfb0-0331ef1e4edc')
+    releaseAddress('2835602d-d12d-4799-bfb0-0331ef1e4edc')

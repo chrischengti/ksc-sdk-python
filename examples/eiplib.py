@@ -53,14 +53,6 @@ def associateAddress(AllocationId,InstanceType,InstanceId,NetworkInterfaceId):
         print 'error '+str(e)
     else:
         print res 
-def startKec(ip,instanceId):
-    try:
-        kecClient.start_instances(**{'InstanceId.1': instanceId})
-    except ClientError, e:
-        print 'start vm by ip ' + ip + ' error '+str(e)
-    else:
-        print ip + ' start !!!!'
-        
 
 if __name__ == "__main__":
     s = get_session()
